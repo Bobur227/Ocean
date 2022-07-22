@@ -39,30 +39,32 @@ Template Name: Home
     <section class="epic-showcase-shelf">
         <div class="container">
             <div class="showcase-shelf">
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Бэтмен.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/В королевском стиле.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Гарри Потер.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Любовь как искупление.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Любовь на поводке.jpg" alt="">
-                </a>
-                <a href="#!" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Монстры на каникулах.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Орел и Решка.jpg" alt="">
-                </a>
-                <a href="#" class="showcase-item">
-                    <img src="<?php bloginfo('template_url'); ?>/assets/image/card/Шкатулка дьявола.jpg" alt="">
-                </a>
+            <?php
+            global $post;
+
+            $myposts = get_posts([ 
+                'numberposts' => -1,
+                //'offset'      => 1,
+                'category_name' => 'Грид' 
+            ]);
+
+            if( $myposts ){
+                foreach( $myposts as $post ){
+                    setup_postdata( $post );
+                    ?>
+                        <a href="#" class="showcase-item">
+                        <?php 
+                            the_post_thumbnail(
+                                array(380,250)
+                            );
+                            ?>
+                        </a>
+                    <?php 
+                }
+            } 
+
+            wp_reset_postdata();
+            ?>
             </div>
         </div>
     </section>
