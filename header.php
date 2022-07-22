@@ -16,9 +16,16 @@
             <div class="header-img">
                 <?php the_custom_logo(); ?>
             </div>
-            <div class="header-registration">
-                <a href="#!">sign in</a>
+            <div class="header-registration"><?php if ( is_user_logged_in() ) {
+                        ?><a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">logout</a>
+                    <?php }
+                    else {
+                        echo '<a href="https://ocean/?page_id=193">sign in</a>';
+                    }
+                ?>
             </div>
         </div>
+       
     </div>
+    <?php the_content(); ?>
 </header>
